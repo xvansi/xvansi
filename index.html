@@ -1198,7 +1198,7 @@
             setTimeout(() => {
               const fileName = `app-${item.id}-${item.versionIndex}-setup.exe`;
               const link = document.createElement('a');
-              link.href = fileName;
+              link.href = `downloads/${fileName}`;
               link.download = fileName;
               link.style.display = 'none';
               document.body.appendChild(link);
@@ -1213,13 +1213,13 @@
             downloadNotification.classList.remove('show');
             setTimeout(() => {
               downloadNotification.remove();
+              // 下载完成后清空购物车
+              cart = [];
+              updateCartCount();
+              closeCart();
             }, 300);
           }, 5000);
         }, 500);
-        
-        cart = [];
-        updateCartCount();
-        closeCart();
       } catch (error) {
         showNotification('结算时发生错误，请重试', 'error');
         console.error('Checkout error:', error);
