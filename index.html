@@ -1194,14 +1194,19 @@
           document.body.appendChild(downloadNotification);
           
           // 自动触发下载
-          cart.forEach(item => {
-            const fileName = `app-${item.id}-${item.versionIndex}-setup.exe`;
-            const link = document.createElement('a');
-            link.href = `downloads/${fileName}`;
-            link.download = fileName;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+          cart.forEach((item, index) => {
+            setTimeout(() => {
+              const fileName = `app-${item.id}-${item.versionIndex}-setup.exe`;
+              const link = document.createElement('a');
+              link.href = fileName;
+              link.download = fileName;
+              link.style.display = 'none';
+              document.body.appendChild(link);
+              link.click();
+              setTimeout(() => {
+                document.body.removeChild(link);
+              }, 100);
+            }, index * 500);
           });
           
           setTimeout(() => {
