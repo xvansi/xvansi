@@ -1181,28 +1181,35 @@
         
         showNotification(`订单提交成功！总计：$${finalTotal.toFixed(2)}`, 'success');
         
-        // 生成下载链接
+        // 自动开始下载
         setTimeout(() => {
           const downloadNotification = document.createElement('div');
           downloadNotification.className = 'notification success show';
           downloadNotification.innerHTML = `
             <div style="margin-bottom: 0.5rem; font-weight: bold;">开始下载您的软件</div>
-            <div style="font-size: 0.9rem; margin-bottom: 0.5rem;">点击下方链接开始下载：</div>
             ${cart.map(item => {
-              const app = apps.find(a => a.id === item.id);
-              const version = app.versions[item.versionIndex];
-              const fileName = `app-${item.id}-${item.versionIndex}-setup.exe`;
-              return `<a href="downloads/${fileName}" style="display: block; margin: 0.3rem 0; color: #fff; text-decoration: underline;" download>📥 ${item.name}</a>`;
+              return `<div style="margin: 0.3rem 0;">📥 ${item.name}</div>`;
             }).join('')}
           `;
           document.body.appendChild(downloadNotification);
+          
+          // 自动触发下载
+          cart.forEach(item => {
+            const fileName = `app-${item.id}-${item.versionIndex}-setup.exe`;
+            const link = document.createElement('a');
+            link.href = `downloads/${fileName}`;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          });
           
           setTimeout(() => {
             downloadNotification.classList.remove('show');
             setTimeout(() => {
               downloadNotification.remove();
             }, 300);
-          }, 10000);
+          }, 5000);
         }, 500);
         
         cart = [];
