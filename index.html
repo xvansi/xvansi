@@ -535,6 +535,65 @@
       color: #fff;
     }
 
+    .version-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      border: 2px solid #000;
+      margin-bottom: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: #fff;
+    }
+
+    .version-item:hover {
+      background: #000;
+      color: #fff;
+      transform: translateX(5px);
+    }
+
+    .version-item.selected {
+      background: #000;
+      color: #fff;
+      box-shadow: 4px 4px 0 #666;
+    }
+
+    .version-info {
+      flex: 1;
+    }
+
+    .version-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .version-detail {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+
+    .version-price {
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .version-select-btn {
+      background: #fff;
+      border: 2px solid #000;
+      padding: 0.5rem 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-left: 1rem;
+    }
+
+    .version-item:hover .version-select-btn,
+    .version-item.selected .version-select-btn {
+      background: #fff;
+      color: #000;
+    }
+
     .cart-total {
       margin-top: 1.5rem;
       padding-top: 1rem;
@@ -616,6 +675,65 @@
       60%, 100% { content: "..."; }
     }
 
+    .cart-floating {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%) translateX(100px);
+      background: #000;
+      color: #fff;
+      border: 3px solid #fff;
+      box-shadow: 4px 4px 0 #000;
+      padding: 1rem;
+      cursor: pointer;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .cart-floating.show {
+      transform: translateY(-50%) translateX(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cart-floating:hover {
+      transform: translateY(-50%) translateX(-5px);
+      box-shadow: 6px 6px 0 #000;
+    }
+
+    .cart-floating-icon {
+      font-size: 1.5rem;
+    }
+
+    .cart-floating-count {
+      background: #fff;
+      color: #000;
+      border: 2px solid #000;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .cart-floating-total {
+      font-size: 0.9rem;
+      border-top: 1px solid #fff;
+      padding-top: 0.3rem;
+      margin-top: 0.3rem;
+    }
+
     @media (max-width: 700px) {
       .store {
         padding: 1.5rem;
@@ -695,6 +813,12 @@
   </style>
 </head>
 <body>
+  <div class="cart-floating" id="cartFloating" onclick="openCart()" role="button" tabindex="0" aria-label="打开购物车">
+    <div class="cart-floating-icon">🛒</div>
+    <div class="cart-floating-count" id="cartFloatingCount">0</div>
+    <div class="cart-floating-total" id="cartFloatingTotal">$0</div>
+  </div>
+
   <div class="store">
     <header class="header" role="banner">
       <div class="logo">
@@ -713,7 +837,6 @@
 
     <div class="feature-bar" role="alert" aria-live="polite">
       <span>📦 今日新品 · 极简工具上线</span>
-      <span>⚫ 全场软件永久授权 ⚪ <span class="highlight">限时灰度</span></span>
     </div>
 
     <div class="search-container">
@@ -721,14 +844,7 @@
       <button class="search-btn" onclick="searchApps()">搜索</button>
     </div>
 
-    <div class="categories" role="group" aria-label="软件分类">
-      <span class="cat-item active" onclick="filterByCategory('all', this)">全部</span>
-      <span class="cat-item" onclick="filterByCategory('图像处理', this)">图像处理</span>
-      <span class="cat-item" onclick="filterByCategory('开发工具', this)">开发工具</span>
-      <span class="cat-item" onclick="filterByCategory('效率利器', this)">效率利器</span>
-      <span class="cat-item" onclick="filterByCategory('媒体编辑', this)">媒体编辑</span>
-      <span class="cat-item" onclick="filterByCategory('实用小件', this)">实用小件</span>
-      <span class="cat-item" onclick="filterByCategory('创意套件', this)">创意套件</span>
+    <div class="categories" id="categoriesContainer" role="group" aria-label="软件分类">
     </div>
 
     <section class="software-grid" id="softwareGrid" role="main" aria-label="软件列表">
@@ -740,12 +856,7 @@
       <span>⚫ 黑白套装 ⚪</span> 任选三件以上自动减25% <span>限时一周</span>
     </div>
 
-    <div class="trust-strip" role="complementary" aria-label="服务保障">
-      <div class="trust-item"><strong>终身</strong> 免费升级</div>
-      <div class="trust-item"><strong>30天</strong> 无理由</div>
-      <div class="trust-item"><strong>黑白</strong> 文档齐全</div>
-      <div class="trust-item"><strong>社区</strong> 论坛支持</div>
-    </div>
+
 
     <footer class="footer" role="contentinfo">
       <p>墨栈 · 软件商店</p>
@@ -773,6 +884,16 @@
     </div>
   </div>
 
+  <div class="modal" id="versionModal" role="dialog" aria-labelledby="versionModalTitle" aria-modal="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="versionModalTitle">选择版本</h2>
+        <button class="close-btn" onclick="closeVersionModal()" aria-label="关闭版本选择">×</button>
+      </div>
+      <div id="versionList"></div>
+    </div>
+  </div>
+
   <div class="notification" id="notification" role="alert" aria-live="assertive"></div>
 
   <script>
@@ -796,6 +917,26 @@
       }
     }
 
+    async function loadCategories() {
+      try {
+        const response = await fetch('data/categories.json');
+        if (!response.ok) {
+          throw new Error('无法加载分类数据');
+        }
+        const data = await response.json();
+        renderCategories(data.categories);
+      } catch (error) {
+        console.error('加载分类失败:', error);
+      }
+    }
+
+    function renderCategories(categories) {
+      const container = document.getElementById('categoriesContainer');
+      container.innerHTML = categories.map(cat => `
+        <span class="cat-item ${cat.active ? 'active' : ''}" onclick="filterByCategory('${cat.id}', this)">${cat.name}</span>
+      `).join('');
+    }
+
     function renderApps(appsToRender) {
       const grid = document.getElementById('softwareGrid');
       const loading = document.getElementById('loading');
@@ -808,16 +949,17 @@
           grid.innerHTML = '<div class="no-results">未找到匹配的软件</div>';
         } else {
           appsToRender.forEach(app => {
+            const defaultVersion = app.versions[0];
             const card = document.createElement('div');
             card.className = 'app-card';
             card.innerHTML = `
               <div class="app-icon ${app.icon}"></div>
               <h2 class="app-name">${app.name}</h2>
-              <div class="app-meta"><span>${app.version}</span><span>${app.size}</span></div>
+              <div class="app-meta"><span>${defaultVersion.version}</span><span>${defaultVersion.size}</span></div>
               <p class="app-description">${app.description}</p>
               <div class="app-footer">
-                <span class="price">$${app.price} <small>永久</small></span>
-                <button class="btn" onclick="addToCart(${app.id})">购买</button>
+                <span class="price">$${defaultVersion.price} <small>永久</small></span>
+                <button class="btn" onclick="showVersionModal(${app.id})">购买</button>
               </div>
             `;
             grid.appendChild(card);
@@ -825,6 +967,79 @@
         }
         loading.classList.remove('active');
       }, 300);
+    }
+
+    let currentAppId = null;
+    let selectedVersion = null;
+
+    function showVersionModal(appId) {
+      currentAppId = appId;
+      selectedVersion = null;
+      const app = apps.find(a => a.id === appId);
+      
+      document.getElementById('versionModalTitle').textContent = `${app.name} - 选择版本`;
+      
+      const versionList = document.getElementById('versionList');
+      versionList.innerHTML = app.versions.map((ver, index) => `
+        <div class="version-item" onclick="selectVersion(${index})" data-index="${index}">
+          <div class="version-info">
+            <div class="version-name">${ver.name}</div>
+            <div class="version-detail">${ver.version} · ${ver.size}</div>
+          </div>
+          <div class="version-price">$${ver.price}</div>
+          <button class="version-select-btn">选择</button>
+        </div>
+      `).join('');
+      
+      document.getElementById('versionModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function selectVersion(index) {
+      const app = apps.find(a => a.id === currentAppId);
+      selectedVersion = app.versions[index];
+      
+      document.querySelectorAll('.version-item').forEach((item, i) => {
+        if (i === index) {
+          item.classList.add('selected');
+        } else {
+          item.classList.remove('selected');
+        }
+      });
+      
+      setTimeout(() => {
+        addVersionToCart(currentAppId, selectedVersion);
+        closeVersionModal();
+      }, 300);
+    }
+
+    function closeVersionModal() {
+      document.getElementById('versionModal').classList.remove('active');
+      document.body.style.overflow = '';
+      currentAppId = null;
+      selectedVersion = null;
+    }
+
+    function addVersionToCart(appId, version) {
+      const app = apps.find(a => a.id === appId);
+      const versionIndex = app.versions.findIndex(v => v.version === version.version);
+      const cartItem = {
+        id: appId,
+        name: `${app.name} (${version.name})`,
+        price: version.price,
+        version: version.version,
+        versionName: version.name,
+        versionIndex: versionIndex
+      };
+      
+      if (cart.some(item => item.id === appId && item.version === version.version)) {
+        showNotification('该版本已在购物车中', 'error');
+        return;
+      }
+
+      cart.push(cartItem);
+      updateCartCount();
+      showNotification(`${app.name} ${version.name} 已添加到购物车`, 'success');
     }
 
     function filterByCategory(category, element) {
@@ -876,18 +1091,7 @@
       }
     }
 
-    function addToCart(appId) {
-      const app = apps.find(a => a.id === appId);
-      
-      if (cart.some(item => item.id === appId)) {
-        showNotification('该软件已在购物车中', 'error');
-        return;
-      }
 
-      cart.push(app);
-      updateCartCount();
-      showNotification(`${app.name} 已添加到购物车`, 'success');
-    }
 
     function removeFromCart(appId) {
       cart = cart.filter(item => item.id !== appId);
@@ -898,6 +1102,25 @@
 
     function updateCartCount() {
       document.getElementById('cartCount').textContent = cart.length;
+      updateCartFloating();
+    }
+
+    function updateCartFloating() {
+      const floating = document.getElementById('cartFloating');
+      const floatingCount = document.getElementById('cartFloatingCount');
+      const floatingTotal = document.getElementById('cartFloatingTotal');
+
+      if (cart.length > 0) {
+        floating.classList.add('show');
+        floatingCount.textContent = cart.length;
+        let total = cart.reduce((sum, item) => sum + item.price, 0);
+        if (cart.length >= 3) {
+          total = total * 0.75;
+        }
+        floatingTotal.textContent = '$' + total.toFixed(2);
+      } else {
+        floating.classList.remove('show');
+      }
     }
 
     function renderCart() {
@@ -957,6 +1180,31 @@
         const finalTotal = cart.length >= 3 ? total * 0.75 : total;
         
         showNotification(`订单提交成功！总计：$${finalTotal.toFixed(2)}`, 'success');
+        
+        // 生成下载链接
+        setTimeout(() => {
+          const downloadNotification = document.createElement('div');
+          downloadNotification.className = 'notification success show';
+          downloadNotification.innerHTML = `
+            <div style="margin-bottom: 0.5rem; font-weight: bold;">开始下载您的软件</div>
+            <div style="font-size: 0.9rem; margin-bottom: 0.5rem;">点击下方链接开始下载：</div>
+            ${cart.map(item => {
+              const app = apps.find(a => a.id === item.id);
+              const version = app.versions[item.versionIndex];
+              const fileName = `app-${item.id}-${item.versionIndex}-setup.exe`;
+              return `<a href="downloads/${fileName}" style="display: block; margin: 0.3rem 0; color: #fff; text-decoration: underline;" download>📥 ${item.name}</a>`;
+            }).join('')}
+          `;
+          document.body.appendChild(downloadNotification);
+          
+          setTimeout(() => {
+            downloadNotification.classList.remove('show');
+            setTimeout(() => {
+              downloadNotification.remove();
+            }, 300);
+          }, 10000);
+        }, 500);
+        
         cart = [];
         updateCartCount();
         closeCart();
@@ -1013,17 +1261,23 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       loadApps();
+      loadCategories();
 
       document.addEventListener('click', (e) => {
         const cartModal = document.getElementById('cartModal');
+        const versionModal = document.getElementById('versionModal');
         if (e.target === cartModal) {
           closeCart();
+        }
+        if (e.target === versionModal) {
+          closeVersionModal();
         }
       });
 
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
           closeCart();
+          closeVersionModal();
         }
       });
 

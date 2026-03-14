@@ -3,82 +3,188 @@
     {
       "id": 1,
       "name": "INKPAD",
-      "version": "v4.2",
-      "size": "35 MB",
-      "price": 29,
       "description": "素描与手绘专用软件，极致黑白笔触，模拟自然墨水扩散。",
       "icon": "icon-pen",
-      "category": "图像处理"
+      "category": "图像处理",
+      "versions": [
+        {
+          "version": "v4.2",
+          "size": "35 MB",
+          "price": 29,
+          "name": "基础版"
+        },
+        {
+          "version": "v4.2 Pro",
+          "size": "52 MB",
+          "price": 49,
+          "name": "专业版"
+        },
+        {
+          "version": "v4.2 Studio",
+          "size": "78 MB",
+          "price": 79,
+          "name": "工作室版"
+        }
+      ]
     },
     {
       "id": 2,
       "name": "CONSTRUCT",
-      "version": "v2.0",
-      "size": "48 MB",
-      "price": 59,
       "description": "可视化构建工具，通过模块拼装快速生成原型，无需编写脚本。",
       "icon": "icon-gear",
-      "category": "开发工具"
+      "category": "开发工具",
+      "versions": [
+        {
+          "version": "v2.0",
+          "size": "48 MB",
+          "price": 59,
+          "name": "个人版"
+        },
+        {
+          "version": "v2.0 Team",
+          "size": "85 MB",
+          "price": 99,
+          "name": "团队版"
+        }
+      ]
     },
     {
       "id": 3,
       "name": "TYPO",
-      "version": "v3.8",
-      "size": "22 MB",
-      "price": 39,
       "description": "专注于黑白版式与字体排印，适合书籍、画册设计。",
       "icon": "icon-grid",
-      "category": "创意套件"
+      "category": "创意套件",
+      "versions": [
+        {
+          "version": "v3.8",
+          "size": "22 MB",
+          "price": 39,
+          "name": "标准版"
+        },
+        {
+          "version": "v3.8 Pro",
+          "size": "35 MB",
+          "price": 69,
+          "name": "专业版"
+        }
+      ]
     },
     {
       "id": 4,
       "name": "MONOCHROME",
-      "version": "v1.6",
-      "size": "18 MB",
-      "price": 19,
       "description": "专业的黑白影像转换工具，模拟经典胶片质感，支持批量导出。",
       "icon": "icon-camera",
-      "category": "媒体编辑"
+      "category": "媒体编辑",
+      "versions": [
+        {
+          "version": "v1.6",
+          "size": "18 MB",
+          "price": 19,
+          "name": "基础版"
+        },
+        {
+          "version": "v1.6 Pro",
+          "size": "28 MB",
+          "price": 35,
+          "name": "专业版"
+        },
+        {
+          "version": "v1.6 Studio",
+          "size": "45 MB",
+          "price": 59,
+          "name": "工作室版"
+        }
+      ]
     },
     {
       "id": 5,
       "name": "FOLDERION",
-      "version": "v5.1",
-      "size": "12 MB",
-      "price": 14,
       "description": "极速文件索引与整理工具，界面只有黑白标签，无干扰。",
       "icon": "icon-box",
-      "category": "效率利器"
+      "category": "效率利器",
+      "versions": [
+        {
+          "version": "v5.1",
+          "size": "12 MB",
+          "price": 14,
+          "name": "免费版"
+        },
+        {
+          "version": "v5.1 Pro",
+          "size": "18 MB",
+          "price": 29,
+          "name": "专业版"
+        }
+      ]
     },
     {
       "id": 6,
       "name": "PAPERWORK",
-      "version": "v2.3",
-      "size": "26 MB",
-      "price": 9,
       "description": "纯粹的写作软件，全屏黑白，支持Markdown与实时预览。",
       "icon": "icon-doc",
-      "category": "实用小件"
+      "category": "实用小件",
+      "versions": [
+        {
+          "version": "v2.3",
+          "size": "26 MB",
+          "price": 9,
+          "name": "基础版"
+        },
+        {
+          "version": "v2.3 Plus",
+          "size": "32 MB",
+          "price": 19,
+          "name": "增强版"
+        }
+      ]
     },
     {
       "id": 7,
       "name": "PIXELFIX",
-      "version": "v1.2",
-      "size": "15 MB",
-      "price": 24,
       "description": "像素级图像修复工具，专注于黑白照片的精细处理。",
       "icon": "icon-pen",
-      "category": "图像处理"
+      "category": "图像处理",
+      "versions": [
+        {
+          "version": "v1.2",
+          "size": "15 MB",
+          "price": 24,
+          "name": "标准版"
+        },
+        {
+          "version": "v1.2 Pro",
+          "size": "22 MB",
+          "price": 39,
+          "name": "专业版"
+        }
+      ]
     },
     {
       "id": 8,
       "name": "CODEBLOCK",
-      "version": "v3.5",
-      "size": "42 MB",
-      "price": 49,
       "description": "轻量级代码编辑器，支持多种语言，界面简洁高效。",
       "icon": "icon-gear",
-      "category": "开发工具"
+      "category": "开发工具",
+      "versions": [
+        {
+          "version": "v3.5",
+          "size": "42 MB",
+          "price": 49,
+          "name": "个人版"
+        },
+        {
+          "version": "v3.5 Pro",
+          "size": "68 MB",
+          "price": 89,
+          "name": "专业版"
+        },
+        {
+          "version": "v3.5 Enterprise",
+          "size": "95 MB",
+          "price": 149,
+          "name": "企业版"
+        }
+      ]
     }
   ]
 }
