@@ -1,344 +1,1046 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>随机HTML页面示例</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
-        }
-        
-        body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        header {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            font-weight: 300;
-        }
-        
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .card {
-            background: white;
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .card h2 {
-            color: #2575fc;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 0.5rem;
-        }
-        
-        .card ul, .card ol {
-            padding-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .card li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .highlight {
-            background-color: #f8f9fa;
-            border-left: 4px solid #6a11cb;
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 0 5px 5px 0;
-        }
-        
-        button {
-            background-color: #6a11cb;
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
-            margin: 0.5rem 0;
-        }
-        
-        button:hover {
-            background-color: #2575fc;
-        }
-        
-        .image-container {
-            text-align: center;
-            margin: 1.5rem 0;
-        }
-        
-        .placeholder-img {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1rem 0;
-        }
-        
-        th, td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        th {
-            background-color: #f8f9fa;
-            color: #6a11cb;
-            font-weight: 600;
-        }
-        
-        tr:hover {
-            background-color: #f8f9fa;
-        }
-        
-        footer {
-            text-align: center;
-            margin-top: 2rem;
-            padding: 1.5rem;
-            border-top: 1px solid #eee;
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        .code-block {
-            background-color: #2d2d2d;
-            color: #f8f8f2;
-            padding: 1rem;
-            border-radius: 5px;
-            font-family: 'Consolas', monospace;
-            overflow-x: auto;
-            margin: 1rem 0;
-        }
-        
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .container {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="极简软件商店 - 专业的黑白风格软件平台，提供图像处理、开发工具、效率利器等优质软件">
+  <meta name="keywords" content="软件商店,图像处理,开发工具,效率软件,黑白设计">
+  <meta name="author" content="BLK/WHT">
+  <title>墨栈 · 软件商店</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #000;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      color: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+    }
+
+    .store {
+      max-width: 1300px;
+      width: 100%;
+      background: #fff;
+      border: 2px solid #000;
+      padding: 2rem 2rem 2rem;
+      box-shadow: 14px 14px 0 #000;
+      transition: all 0.1s ease;
+    }
+
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid #000;
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .logo h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
+      background: #000;
+      color: #fff;
+      display: inline-block;
+      padding: 0.2rem 1rem 0.2rem 1rem;
+      border: 3px solid #000;
+      line-height: 1;
+    }
+
+    .logo p {
+      margin-top: 0.4rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #444;
+      letter-spacing: 0.5px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: #000;
+      font-weight: 600;
+      font-size: 1.1rem;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 0.2rem;
+    }
+
+    .nav a:hover {
+      border-bottom-color: #000;
+    }
+
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #000;
+      color: #fff;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+
+    .feature-bar {
+      background: #f2f2f2;
+      border: 2px solid #000;
+      padding: 1.2rem 2rem;
+      margin-bottom: 2.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 600;
+    }
+
+    .feature-bar span {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .feature-bar .highlight {
+      background: #000;
+      color: #fff;
+      padding: 0.2rem 1rem;
+      margin-left: 0.8rem;
+      border: 1px solid #000;
+    }
+
+    .search-container {
+      margin-bottom: 2rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 0.8rem 1rem;
+      border: 2px solid #000;
+      font-size: 1rem;
+      font-weight: 600;
+      background: #fff;
+      outline: none;
+    }
+
+    .search-input:focus {
+      box-shadow: 3px 3px 0 #000;
+    }
+
+    .search-btn {
+      background: #000;
+      color: #fff;
+      border: 2px solid #000;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 #000;
+      transition: 0.1s;
+    }
+
+    .search-btn:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.5rem;
+      margin-bottom: 2.5rem;
+      border-top: 1px solid #aaa;
+      border-bottom: 1px solid #aaa;
+      padding: 1.2rem 0;
+    }
+
+    .cat-item {
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 0.3rem 1.2rem;
+      background: #fff;
+      border: 2px solid #000;
+      cursor: pointer;
+      transition: 0.1s;
+      box-shadow: 3px 3px 0 #000;
+    }
+
+    .cat-item:hover, .cat-item.active {
+      background: #000;
+      color: #fff;
+      border-color: #fff;
+      box-shadow: 0 0 0 2px #000, 3px 3px 0 #fff;
+    }
+
+    .software-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem 1.8rem;
+      margin: 2.5rem 0 3rem;
+      min-height: 400px;
+    }
+
+    .app-card {
+      border: 2px solid #000;
+      background: #fff;
+      padding: 1.5rem 1.2rem 1.5rem;
+      box-shadow: 6px 6px 0 #111;
+      transition: 0.1s linear;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 10px 10px 0 #000;
+    }
+
+    .app-icon {
+      width: 60px;
+      height: 60px;
+      background: #fff;
+      border: 3px solid #000;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #000;
+      box-shadow: 4px 4px 0 #000;
+    }
+
+    .icon-gear::before {
+      content: "⚙️";
+      filter: grayscale(100%) contrast(200%);
+      font-size: 2.2rem;
+    }
+
+    .icon-pen::before {
+      content: "✎";
+      font-size: 2.6rem;
+      font-weight: bold;
+    }
+
+    .icon-grid::before {
+      content: "▦";
+      font-size: 2.5rem;
+    }
+
+    .icon-camera::before {
+      content: "◷";
+      font-size: 2.4rem;
+    }
+
+    .icon-box::before {
+      content: "▣";
+      font-size: 2.6rem;
+    }
+
+    .icon-doc::before {
+      content: "📄";
+      filter: grayscale(100%);
+      font-size: 2.2rem;
+    }
+
+    .app-name {
+      font-size: 1.9rem;
+      font-weight: 800;
+      line-height: 1.1;
+      text-transform: uppercase;
+      margin: 0.4rem 0 0.2rem;
+      letter-spacing: -0.5px;
+      border-left: 10px solid #000;
+      padding-left: 0.7rem;
+    }
+
+    .app-meta {
+      font-size: 0.85rem;
+      color: #333;
+      margin-bottom: 0.75rem;
+      border-bottom: 1px dotted #222;
+      padding-bottom: 0.6rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .app-meta span {
+      border: 1px solid #000;
+      padding: 0.1rem 0.5rem;
+      background: #fff;
+    }
+
+    .app-description {
+      font-size: 0.95rem;
+      color: #222;
+      margin-bottom: 1.2rem;
+      line-height: 1.4;
+      flex: 1;
+    }
+
+    .app-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 2px solid #000;
+      padding-top: 1rem;
+      margin-top: auto;
+    }
+
+    .price {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .price small {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #555;
+    }
+
+    .btn {
+      background: #fff;
+      border: 2px solid #000;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 0.5rem 1.5rem;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 #000;
+      transition: 0.1s;
+      text-transform: uppercase;
+    }
+
+    .btn:hover {
+      background: #000;
+      color: #fff;
+      border-color: #fff;
+      box-shadow: 0 0 0 2px #000, 3px 3px 0 #fff;
+    }
+
+    .btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 #000;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .offer-banner {
+      background: #000;
+      color: #fff;
+      padding: 1.2rem;
+      margin: 2rem 0 1.5rem;
+      border: 4px solid #fff;
+      outline: 4px solid #000;
+      font-size: 1.3rem;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .offer-banner span {
+      background: #fff;
+      color: #000;
+      padding: 0.1rem 1rem;
+      border: 2px solid #000;
+    }
+
+    .trust-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 2px;
+      background: #000;
+      border: 2px solid #000;
+      margin: 3rem 0 2rem;
+    }
+
+    .trust-item {
+      background: #fff;
+      padding: 1.2rem 1rem;
+      text-align: center;
+      font-weight: 600;
+      border: 1px solid #000;
+    }
+
+    .trust-item strong {
+      display: block;
+      font-size: 1.8rem;
+      background: #000;
+      color: #fff;
+      margin-bottom: 0.6rem;
+      line-height: 1;
+    }
+
+    .footer {
+      border-top: 3px solid #000;
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      color: #000;
+      text-decoration: none;
+      border-bottom: 1px solid #000;
+    }
+
+    .footer-links a:hover {
+      background: #000;
+      color: #fff;
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 3rem;
+      font-size: 1.2rem;
+      color: #333;
+      border: 2px solid #000;
+      background: #f9f9f9;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #fff;
+      border: 3px solid #000;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 10px 10px 0 #000;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid #000;
+      padding-bottom: 1rem;
+    }
+
+    .modal-header h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .close-btn {
+      background: #000;
+      color: #fff;
+      border: none;
+      width: 30px;
+      height: 30px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-name {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .cart-item-price {
+      color: #555;
+      font-size: 0.9rem;
+    }
+
+    .cart-item-remove {
+      background: #fff;
+      border: 2px solid #000;
+      color: #000;
+      padding: 0.3rem 0.8rem;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .cart-item-remove:hover {
+      background: #000;
+      color: #fff;
+    }
+
+    .cart-total {
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 2px solid #000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      background: #000;
+      color: #fff;
+      border: 2px solid #000;
+      padding: 1rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 1rem;
+      box-shadow: 3px 3px 0 #000;
+    }
+
+    .checkout-btn:hover {
+      background: #fff;
+      color: #000;
+    }
+
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #000;
+      color: #fff;
+      padding: 1rem 1.5rem;
+      border: 2px solid #fff;
+      box-shadow: 4px 4px 0 #000;
+      z-index: 1001;
+      font-weight: 600;
+      transform: translateX(400px);
+      transition: transform 0.3s ease;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    .notification.success {
+      background: #000;
+    }
+
+    .notification.error {
+      background: #fff;
+      color: #000;
+      border-color: #000;
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+
+    .loading.active {
+      display: block;
+    }
+
+    .loading::after {
+      content: "...";
+      animation: dots 1.5s steps(4, end) infinite;
+    }
+
+    @keyframes dots {
+      0%, 20% { content: "."; }
+      40% { content: ".."; }
+      60%, 100% { content: "..."; }
+    }
+
+    @media (max-width: 700px) {
+      .store {
+        padding: 1.5rem;
+      }
+
+      .header {
+        flex-direction: column;
+        align-items: start;
+        gap: 1rem;
+      }
+
+      .nav {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .search-container {
+        flex-direction: column;
+      }
+
+      .search-input, .search-btn {
+        width: 100%;
+      }
+
+      .categories {
+        gap: 0.5rem 1rem;
+      }
+
+      .cat-item {
+        font-size: 0.9rem;
+        padding: 0.3rem 0.8rem;
+      }
+
+      .software-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .offer-banner {
+        font-size: 1rem;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .trust-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+
+      .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo h1 {
+        font-size: 2rem;
+      }
+
+      .app-name {
+        font-size: 1.5rem;
+      }
+
+      .price {
+        font-size: 1.5rem;
+      }
+
+      .trust-strip {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>随机HTML页面示例</h1>
-        <p class="subtitle">这是一个展示各种HTML元素的示例页面</p>
+  <div class="store">
+    <header class="header" role="banner">
+      <div class="logo">
+        <h1>Mo Zhan</h1>
+      </div>
+      <nav class="nav" role="navigation" aria-label="主导航">
+        <a href="#" onclick="showHome()">首页</a>
+        <a href="#" onclick="showAllApps()">浏览</a>
+        <a href="#" onclick="showSupport()">支持</a>
+        <div class="cart-icon" onclick="openCart()" aria-label="购物车" role="button" tabindex="0">
+          🛒
+          <span class="cart-count" id="cartCount">0</span>
+        </div>
+      </nav>
     </header>
-    
-    <div class="container">
-        <div class="card">
-            <h2>关于HTML</h2>
-            <p>HTML（超文本标记语言）是构建网页的标准标记语言。它描述网页的结构，由一系列元素组成，这些元素告诉浏览器如何显示内容。</p>
-            
-            <div class="highlight">
-                <strong>提示：</strong> HTML元素由开始标签、内容和结束标签组成，例如：&lt;p&gt;这是一个段落&lt;/p&gt;
-            </div>
-            
-            <p>HTML5是最新版本，引入了许多新特性，如语义元素、音频和视频支持等。</p>
-            
-            <button id="learnMoreBtn">了解更多</button>
-        </div>
-        
-        <div class="card">
-            <h2>常用HTML标签</h2>
-            <ul>
-                <li><strong>&lt;h1&gt; - &lt;h6&gt;：</strong> 标题标签，定义不同级别的标题</li>
-                <li><strong>&lt;p&gt;：</strong> 段落标签，定义文本段落</li>
-                <li><strong>&lt;a&gt;：</strong> 链接标签，创建超链接</li>
-                <li><strong>&lt;img&gt;：</strong> 图像标签，嵌入图像</li>
-                <li><strong>&lt;div&gt;：</strong> 分区标签，用于布局和样式化</li>
-                <li><strong>&lt;ul&gt;和&lt;ol&gt;：</strong> 无序列表和有序列表</li>
-            </ul>
-            
-            <div class="image-container">
-                <div class="placeholder-img">示例图像占位符</div>
-            </div>
-        </div>
-        
-        <div class="card">
-            <h2>简单表格示例</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>标签</th>
-                        <th>描述</th>
-                        <th>用途</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>&lt;header&gt;</td>
-                        <td>页眉</td>
-                        <td>定义文档或节的页眉</td>
-                    </tr>
-                    <tr>
-                        <td>&lt;main&gt;</td>
-                        <td>主体内容</td>
-                        <td>定义文档的主要内容</td>
-                    </tr>
-                    <tr>
-                        <td>&lt;footer&gt;</td>
-                        <td>页脚</td>
-                        <td>定义文档或节的页脚</td>
-                    </tr>
-                    <tr>
-                        <td>&lt;article&gt;</td>
-                        <td>文章</td>
-                        <td>定义独立的内容块</td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <h3>代码示例</h3>
-            <div class="code-block">
-&lt;!DOCTYPE html&gt;<br>
-&lt;html&gt;<br>
-&lt;head&gt;<br>
-&nbsp;&nbsp;&lt;title&gt;页面标题&lt;/title&gt;<br>
-&lt;/head&gt;<br>
-&lt;body&gt;<br>
-&nbsp;&nbsp;&lt;h1&gt;我的第一个HTML页面&lt;/h1&gt;<br>
-&nbsp;&nbsp;&lt;p&gt;Hello World!&lt;/p&gt;<br>
-&lt;/body&gt;<br>
-&lt;/html&gt;
-            </div>
-        </div>
-    </div>
-    
-    <div class="card">
-        <h2>交互示例</h2>
-        <p>点击下面的按钮查看动态效果：</p>
-        
-        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin: 1rem 0;">
-            <button id="changeColorBtn">更改标题颜色</button>
-            <button id="addItemBtn">添加列表项</button>
-            <button id="showAlertBtn">显示消息</button>
-            <button id="resetBtn">重置所有更改</button>
-        </div>
-        
-        <h3>动态列表</h3>
-        <ul id="dynamicList">
-            <li>HTML 5</li>
-            <li>CSS 3</li>
-            <li>JavaScript ES6</li>
-        </ul>
-        
-        <h3>当前状态</h3>
-        <p id="statusText">页面尚未修改。</p>
-    </div>
-    
-    <footer>
-        <p>© 2023 随机HTML页面示例 | 本页面仅用于演示目的</p>
-        <p>使用纯HTML、CSS和JavaScript创建</p>
-    </footer>
 
-    <script>
-        document.getElementById('learnMoreBtn').addEventListener('click', function() {
-            window.open('https://developer.mozilla.org/zh-CN/docs/Web/HTML', '_blank');
-        });
+    <div class="feature-bar" role="alert" aria-live="polite">
+      <span>📦 今日新品 · 极简工具上线</span>
+      <span>⚫ 全场软件永久授权 ⚪ <span class="highlight">限时灰度</span></span>
+    </div>
+
+    <div class="search-container">
+      <input type="text" class="search-input" id="searchInput" placeholder="搜索软件..." aria-label="搜索软件" onkeyup="handleSearch(event)">
+      <button class="search-btn" onclick="searchApps()">搜索</button>
+    </div>
+
+    <div class="categories" role="group" aria-label="软件分类">
+      <span class="cat-item active" onclick="filterByCategory('all', this)">全部</span>
+      <span class="cat-item" onclick="filterByCategory('图像处理', this)">图像处理</span>
+      <span class="cat-item" onclick="filterByCategory('开发工具', this)">开发工具</span>
+      <span class="cat-item" onclick="filterByCategory('效率利器', this)">效率利器</span>
+      <span class="cat-item" onclick="filterByCategory('媒体编辑', this)">媒体编辑</span>
+      <span class="cat-item" onclick="filterByCategory('实用小件', this)">实用小件</span>
+      <span class="cat-item" onclick="filterByCategory('创意套件', this)">创意套件</span>
+    </div>
+
+    <section class="software-grid" id="softwareGrid" role="main" aria-label="软件列表">
+    </section>
+
+    <div class="loading" id="loading">加载中</div>
+
+    <div class="offer-banner" role="alert">
+      <span>⚫ 黑白套装 ⚪</span> 任选三件以上自动减25% <span>限时一周</span>
+    </div>
+
+    <div class="trust-strip" role="complementary" aria-label="服务保障">
+      <div class="trust-item"><strong>终身</strong> 免费升级</div>
+      <div class="trust-item"><strong>30天</strong> 无理由</div>
+      <div class="trust-item"><strong>黑白</strong> 文档齐全</div>
+      <div class="trust-item"><strong>社区</strong> 论坛支持</div>
+    </div>
+
+    <footer class="footer" role="contentinfo">
+      <p>墨栈 · 软件商店</p>
+      <div class="footer-links">
+        <a href="#" onclick="showTerms()">条款</a>
+        <a href="#" onclick="showPrivacy()">隐私</a>
+        <a href="#" onclick="showHelp()">帮助</a>
+        <a href="#" onclick="showAbout()">关于</a>
+      </div>
+    </footer>
+  </div>
+
+  <div class="modal" id="cartModal" role="dialog" aria-labelledby="cartModalTitle" aria-modal="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="cartModalTitle">购物车</h2>
+        <button class="close-btn" onclick="closeCart()" aria-label="关闭购物车">×</button>
+      </div>
+      <div id="cartItems"></div>
+      <div class="cart-total" id="cartTotal">
+        <span>总计:</span>
+        <span id="totalPrice">$0</span>
+      </div>
+      <button class="checkout-btn" onclick="checkout()">结算</button>
+    </div>
+  </div>
+
+  <div class="notification" id="notification" role="alert" aria-live="assertive"></div>
+
+  <script>
+    let apps = [];
+    let cart = [];
+    let currentCategory = 'all';
+    let searchQuery = '';
+
+    async function loadApps() {
+      try {
+        const response = await fetch('data/apps.json');
+        if (!response.ok) {
+          throw new Error('无法加载软件数据');
+        }
+        const data = await response.json();
+        apps = data.apps;
+        renderApps(apps);
+      } catch (error) {
+        console.error('加载数据失败:', error);
+        showNotification('加载软件数据失败，请刷新页面重试', 'error');
+      }
+    }
+
+    function renderApps(appsToRender) {
+      const grid = document.getElementById('softwareGrid');
+      const loading = document.getElementById('loading');
+
+      loading.classList.add('active');
+      grid.innerHTML = '';
+
+      setTimeout(() => {
+        if (appsToRender.length === 0) {
+          grid.innerHTML = '<div class="no-results">未找到匹配的软件</div>';
+        } else {
+          appsToRender.forEach(app => {
+            const card = document.createElement('div');
+            card.className = 'app-card';
+            card.innerHTML = `
+              <div class="app-icon ${app.icon}"></div>
+              <h2 class="app-name">${app.name}</h2>
+              <div class="app-meta"><span>${app.version}</span><span>${app.size}</span></div>
+              <p class="app-description">${app.description}</p>
+              <div class="app-footer">
+                <span class="price">$${app.price} <small>永久</small></span>
+                <button class="btn" onclick="addToCart(${app.id})">购买</button>
+              </div>
+            `;
+            grid.appendChild(card);
+          });
+        }
+        loading.classList.remove('active');
+      }, 300);
+    }
+
+    function filterByCategory(category, element) {
+      currentCategory = category;
+      
+      document.querySelectorAll('.cat-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      element.classList.add('active');
+
+      let filteredApps = apps;
+      
+      if (category !== 'all') {
+        filteredApps = apps.filter(app => app.category === category);
+      }
+
+      if (searchQuery) {
+        filteredApps = filteredApps.filter(app => 
+          app.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          app.description.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      }
+
+      renderApps(filteredApps);
+    }
+
+    function searchApps() {
+      searchQuery = document.getElementById('searchInput').value.trim();
+      
+      let filteredApps = apps;
+
+      if (currentCategory !== 'all') {
+        filteredApps = filteredApps.filter(app => app.category === currentCategory);
+      }
+
+      if (searchQuery) {
+        filteredApps = filteredApps.filter(app => 
+          app.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          app.description.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      }
+
+      renderApps(filteredApps);
+    }
+
+    function handleSearch(event) {
+      if (event.key === 'Enter') {
+        searchApps();
+      }
+    }
+
+    function addToCart(appId) {
+      const app = apps.find(a => a.id === appId);
+      
+      if (cart.some(item => item.id === appId)) {
+        showNotification('该软件已在购物车中', 'error');
+        return;
+      }
+
+      cart.push(app);
+      updateCartCount();
+      showNotification(`${app.name} 已添加到购物车`, 'success');
+    }
+
+    function removeFromCart(appId) {
+      cart = cart.filter(item => item.id !== appId);
+      updateCartCount();
+      renderCart();
+      showNotification('软件已从购物车移除', 'success');
+    }
+
+    function updateCartCount() {
+      document.getElementById('cartCount').textContent = cart.length;
+    }
+
+    function renderCart() {
+      const cartItems = document.getElementById('cartItems');
+      
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<p style="text-align: center; padding: 2rem; color: #666;">购物车为空</p>';
+        document.getElementById('totalPrice').textContent = '$0';
+        return;
+      }
+
+      let total = 0;
+      cartItems.innerHTML = cart.map(item => {
+        total += item.price;
+        return `
+          <div class="cart-item">
+            <div class="cart-item-info">
+              <div class="cart-item-name">${item.name}</div>
+              <div class="cart-item-price">$${item.price}</div>
+            </div>
+            <button class="cart-item-remove" onclick="removeFromCart(${item.id})">移除</button>
+          </div>
+        `;
+      }).join('');
+
+      if (cart.length >= 3) {
+        total = total * 0.75;
+        cartItems.innerHTML += `
+          <div style="text-align: center; padding: 1rem; background: #f0f0f0; border: 2px solid #000; margin-top: 1rem; font-weight: 700;">
+            🎉 套装优惠：已自动减免 25%
+          </div>
+        `;
+      }
+
+      document.getElementById('totalPrice').textContent = `$${total.toFixed(2)}`;
+    }
+
+    function openCart() {
+      renderCart();
+      document.getElementById('cartModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCart() {
+      document.getElementById('cartModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        showNotification('购物车为空，请先添加软件', 'error');
+        return;
+      }
+
+      try {
+        const total = cart.reduce((sum, item) => sum + item.price, 0);
+        const finalTotal = cart.length >= 3 ? total * 0.75 : total;
         
-        document.getElementById('changeColorBtn').addEventListener('click', function() {
-            const header = document.querySelector('header');
-            const colors = ['#6a11cb', '#2575fc', '#ff416c', '#11998e', '#ff8008'];
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            header.style.background = `linear-gradient(135deg, ${randomColor} 0%, ${colors[(colors.indexOf(randomColor)+1)%colors.length]} 100%)`;
-            document.getElementById('statusText').textContent = `标题颜色已更改为渐变背景 (${new Date().toLocaleTimeString()})`;
-        });
-        
-        document.getElementById('addItemBtn').addEventListener('click', function() {
-            const list = document.getElementById('dynamicList');
-            const items = ['React', 'Vue.js', 'Angular', 'Svelte', 'TypeScript'];
-            const randomItem = items[Math.floor(Math.random() * items.length)];
-            
-            const newItem = document.createElement('li');
-            newItem.textContent = randomItem;
-            list.appendChild(newItem);
-            
-            document.getElementById('statusText').textContent = `已添加新项目: ${randomItem} (${new Date().toLocaleTimeString()})`;
-        });
-        
-        document.getElementById('showAlertBtn').addEventListener('click', function() {
-            const messages = [
-                "HTML是网页的骨架！",
-                "CSS让网页变得美观！",
-                "JavaScript让网页动起来！",
-                "响应式设计确保网页在所有设备上都能良好显示！",
-                "语义化HTML有助于SEO和无障碍访问！"
-            ];
-            
-            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-            alert(randomMessage);
-            document.getElementById('statusText').textContent = `已显示消息: "${randomMessage}" (${new Date().toLocaleTimeString()})`;
-        });
-        
-        document.getElementById('resetBtn').addEventListener('click', function() {
-            // 重置标题颜色
-            document.querySelector('header').style.background = 'linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)';
-            
-            // 重置列表
-            const list = document.getElementById('dynamicList');
-            list.innerHTML = '<li>HTML 5</li><li>CSS 3</li><li>JavaScript ES6</li>';
-            
-            document.getElementById('statusText').textContent = `页面已重置 (${new Date().toLocaleTimeString()})`;
-        });
-    </script>
+        showNotification(`订单提交成功！总计：$${finalTotal.toFixed(2)}`, 'success');
+        cart = [];
+        updateCartCount();
+        closeCart();
+      } catch (error) {
+        showNotification('结算时发生错误，请重试', 'error');
+        console.error('Checkout error:', error);
+      }
+    }
+
+    function showNotification(message, type) {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.className = `notification ${type} show`;
+
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000);
+    }
+
+    function showHome() {
+      currentCategory = 'all';
+      searchQuery = '';
+      document.getElementById('searchInput').value = '';
+      document.querySelectorAll('.cat-item').forEach(item => {
+        item.classList.remove('active');
+      });
+      document.querySelector('.cat-item').classList.add('active');
+      renderApps(apps);
+    }
+
+    function showAllApps() {
+      showHome();
+    }
+
+    function showSupport() {
+      showNotification('支持功能开发中...', 'success');
+    }
+
+    function showTerms() {
+      showNotification('服务条款页面开发中...', 'success');
+    }
+
+    function showPrivacy() {
+      showNotification('隐私政策页面开发中...', 'success');
+    }
+
+    function showHelp() {
+      showNotification('帮助中心页面开发中...', 'success');
+    }
+
+    function showAbout() {
+      showNotification('关于我们页面开发中...', 'success');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadApps();
+
+      document.addEventListener('click', (e) => {
+        const cartModal = document.getElementById('cartModal');
+        if (e.target === cartModal) {
+          closeCart();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeCart();
+        }
+      });
+
+      const cartIcon = document.querySelector('.cart-icon');
+      cartIcon.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openCart();
+        }
+      });
+    });
+
+    window.onerror = function(message, source, lineno, colno, error) {
+      console.error('Global error:', { message, source, lineno, colno, error });
+      showNotification('发生错误，请刷新页面重试', 'error');
+      return true;
+    };
+  </script>
 </body>
 </html>
