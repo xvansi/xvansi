@@ -11,19 +11,22 @@
           "version": "v4.2",
           "size": "35 MB",
           "price": 29,
-          "name": "基础版"
+          "name": "基础版",
+          "download": "downloads/inkpad/inkpad-basic.exe"
         },
         {
           "version": "v4.2 Pro",
           "size": "52 MB",
           "price": 49,
-          "name": "专业版"
+          "name": "专业版",
+          "download": "downloads/inkpad/inkpad-pro.exe"
         },
         {
           "version": "v4.2 Studio",
           "size": "78 MB",
           "price": 79,
-          "name": "工作室版"
+          "name": "工作室版",
+          "download": "downloads/inkpad/inkpad-studio.exe"
         }
       ]
     },
@@ -38,13 +41,15 @@
           "version": "v2.0",
           "size": "48 MB",
           "price": 59,
-          "name": "个人版"
+          "name": "个人版",
+          "download": "downloads/construct/construct-personal.exe"
         },
         {
           "version": "v2.0 Team",
           "size": "85 MB",
           "price": 99,
-          "name": "团队版"
+          "name": "团队版",
+          "download": "downloads/construct/construct-team.exe"
         }
       ]
     },
@@ -59,13 +64,15 @@
           "version": "v3.8",
           "size": "22 MB",
           "price": 39,
-          "name": "标准版"
+          "name": "标准版",
+          "download": "downloads/typo/typo-standard.exe"
         },
         {
           "version": "v3.8 Pro",
           "size": "35 MB",
           "price": 69,
-          "name": "专业版"
+          "name": "专业版",
+          "download": "downloads/typo/typo-pro.exe"
         }
       ]
     },
