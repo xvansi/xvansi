@@ -2,17 +2,17 @@
   "apps": [
     {
       "id": 1,
-      "name": "1",
-      "description": "1",
-      "icon": "/icons/beta.icn",
-      "category": "工具软件",
+      "name": "测试",
+      "description": "这是一个测试应用",
+      "icon": "/icons/test.icn",
+      "category": "all",
       "versions": [
         {
           "version": "v1.0",
-          "size": "20Mb",
+          "size": "10MB",
           "price": 0.0,
-          "name": "Beta版",
-          "download": "dowloads/beta/beta.exe"
+          "name": "测试版",
+          "download": "downloads/test/test.exe"
         }
       ]
     }
