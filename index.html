@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 <head>
   <script src="https://5gvci.com/act/files/tag.min.js?z=10826126" data-cfasync="false" async></script>
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="极简软件商店 - 专业的黑白风格软件平台，提供图像处理、开发工具、效率利器等优质软件">
@@ -1182,22 +1183,41 @@
         
         showNotification(`订单提交成功！总计：$${finalTotal.toFixed(2)}`, 'success');
         
-        // 自动开始下载
+        // 跳转到 monetag 广告链接
         setTimeout(() => {
-          const downloadNotification = document.createElement('div');
-          downloadNotification.className = 'notification success show';
-          downloadNotification.innerHTML = `
-            <div style="margin-bottom: 0.5rem; font-weight: bold;">开始下载您的软件</div>
-            ${cart.map(item => {
-              return `<div style="margin: 0.3rem 0;">📥 ${item.name}</div>`;
-            }).join('')}
-          `;
-          document.body.appendChild(downloadNotification);
-          
-          // 自动触发下载
-          cart.forEach((item, index) => {
-            setTimeout(() => {
-              const app = apps.find(a => a.id === item.id);
+          // 保存购物车数据到 localStorage
+          localStorage.setItem('checkoutCart', JSON.stringify(cart));
+          // 跳转到广告链接
+          window.location.href = 'https://omg10.com/4/10826171';
+        }, 1000);
+      } catch (error) {
+        showNotification('结算时发生错误，请重试', 'error');
+        console.error('Checkout error:', error);
+      }
+    }
+
+    // 处理从广告返回后的下载
+    function processDownloads() {
+      const savedCart = localStorage.getItem('checkoutCart');
+      if (savedCart) {
+        const cart = JSON.parse(savedCart);
+        localStorage.removeItem('checkoutCart');
+        
+        const downloadNotification = document.createElement('div');
+        downloadNotification.className = 'notification success show';
+        downloadNotification.innerHTML = `
+          <div style="margin-bottom: 0.5rem; font-weight: bold;">开始下载您的软件</div>
+          ${cart.map(item => {
+            return `<div style="margin: 0.3rem 0;">📥 ${item.name}</div>`;
+          }).join('')}
+        `;
+        document.body.appendChild(downloadNotification);
+        
+        // 自动触发下载
+        cart.forEach((item, index) => {
+          setTimeout(() => {
+            const app = apps.find(a => a.id === item.id);
+            if (app) {
               const version = app.versions[item.versionIndex];
               const downloadPath = version.download;
               const fileName = downloadPath.split('/').pop();
@@ -1211,23 +1231,20 @@
               setTimeout(() => {
                 document.body.removeChild(link);
               }, 100);
-            }, index * 500);
-          });
-          
+            }
+          }, index * 500);
+        });
+        
+        setTimeout(() => {
+          downloadNotification.classList.remove('show');
           setTimeout(() => {
-            downloadNotification.classList.remove('show');
-            setTimeout(() => {
-              downloadNotification.remove();
-              // 下载完成后清空购物车
-              cart = [];
-              updateCartCount();
-              closeCart();
-            }, 300);
-          }, 5000);
-        }, 500);
-      } catch (error) {
-        showNotification('结算时发生错误，请重试', 'error');
-        console.error('Checkout error:', error);
+            downloadNotification.remove();
+            // 清空购物车
+            window.cart = [];
+            updateCartCount();
+            closeCart();
+          }, 300);
+        }, 5000);
       }
     }
 
@@ -1279,6 +1296,9 @@
     document.addEventListener('DOMContentLoaded', () => {
       loadApps();
       loadCategories();
+      
+      // 检查是否有保存的购物车数据，处理从广告返回后的下载
+      processDownloads();
 
       document.addEventListener('click', (e) => {
         const cartModal = document.getElementById('cartModal');
