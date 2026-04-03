@@ -1,3 +1,20 @@
 {
-  "apps": []
+  "apps": [
+    {
+      "id": 1,
+      "name": "1",
+      "description": "1",
+      "icon": "/icons/beta.icn",
+      "category": "工具软件",
+      "versions": [
+        {
+          "version": "v1.0",
+          "size": "20Mb",
+          "price": 0.0,
+          "name": "Beta版",
+          "download": "dowloads/beta/beta.exe"
+        }
+      ]
+    }
+  ]
 }

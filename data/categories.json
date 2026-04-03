@@ -4,6 +4,11 @@
       "id": "all",
       "name": "全部",
       "active": true
+    },
+    {
+      "id": "工具软件",
+      "name": "工具软件",
+      "active": false
     }
   ]
 }
