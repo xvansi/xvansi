@@ -4,36 +4,6 @@
       "id": "all",
       "name": "全部",
       "active": true
-    },
-    {
-      "id": "图像处理",
-      "name": "图像处理",
-      "active": false
-    },
-    {
-      "id": "开发工具",
-      "name": "开发工具",
-      "active": false
-    },
-    {
-      "id": "效率利器",
-      "name": "效率利器",
-      "active": false
-    },
-    {
-      "id": "媒体编辑",
-      "name": "媒体编辑",
-      "active": false
-    },
-    {
-      "id": "实用小件",
-      "name": "实用小件",
-      "active": false
-    },
-    {
-      "id": "创意套件",
-      "name": "创意套件",
-      "active": false
     }
   ]
 }
