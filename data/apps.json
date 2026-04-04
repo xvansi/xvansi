@@ -24,6 +24,24 @@
           "download": "downloads/MAS_AIO/MAS_AIO.cmd"
         }
       ]
+    },
+    {
+      "id": 2,
+      "name": "WxCleaner - 微信重复文件清理工具",
+      "description": "WxCleaner 是一款专为清理微信接收文件而设计的轻量级桌面工具。它能够高效扫描指定目录，通过智能算法识别重复文件，并提供可视化的清理界面，帮助用户释放磁盘空间。",
+      "icon": "/icons/WxCleaner.ico",
+      "category": "实用工具",
+      "open_source": true,
+      "repo_url": "https://github.com/yqxie1991/WxCleaner",
+      "versions": [
+        {
+          "version": "v1.0.0",
+          "size": "11.6MB",
+          "price": 0.0,
+          "name": "原版",
+          "download": "源/downloads/WxCleaner/WxCleaner.exe"
+        }
+      ]
     }
   ]
 }
