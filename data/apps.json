@@ -78,6 +78,24 @@
           "download": "源/downloads/图标提取器/图标提取转换器.exe"
         }
       ]
+    },
+    {
+      "id": 5,
+      "name": "Cheat Engine",
+      "description": "Cheat Engine 是一款开源、高度可定制且功能强大的内存扫描与修改工具，主要用于 Windows 平台。它最初面向单机游戏的内存数据修改（如生命值、金币、经验值等），帮助玩家更自由地探索游戏机制、降低重复 grind 或调试游戏逻辑。",
+      "icon": "/icons/Cheat Engine.ico",
+      "category": "Mod专区",
+      "open_source": false,
+      "repo_url": null,
+      "versions": [
+        {
+          "version": "v7.4",
+          "size": "32MB",
+          "price": 0.0,
+          "name": "汉化版",
+          "download": "源/downloads/Cheat Engine 7.4/Cheat Engine7.4 Setup.exe"
+        }
+      ]
     }
   ]
 }
