@@ -5,7 +5,7 @@
       "name": "Windows激活工具",
       "description": "开源Windows和Office激活器，支持HWID、Ohook、TSforge、KMS38和在线KMS激活方法，并具备高级故障排除功能。",
       "icon": "/icons/mas.ico",
-      "category": "实用工具",
+      "category": "Windows工具",
       "open_source": true,
       "repo_url": "https://github.com/massgravel/Microsoft-Activation-Scripts",
       "versions": [
@@ -30,7 +30,7 @@
       "name": "WxCleaner - 微信重复文件清理工具",
       "description": "WxCleaner 是一款专为清理微信接收文件而设计的轻量级桌面工具。它能够高效扫描指定目录，通过智能算法识别重复文件，并提供可视化的清理界面，帮助用户释放磁盘空间。",
       "icon": "/icons/WxCleaner.ico",
-      "category": "实用工具",
+      "category": "Windows工具",
       "open_source": true,
       "repo_url": "https://github.com/yqxie1991/WxCleaner",
       "versions": [
@@ -40,6 +40,42 @@
           "price": 0.0,
           "name": "原版",
           "download": "源/downloads/WxCleaner/WxCleaner.exe"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Radmin VPN",
+      "description": "Radmin LAN是一款使用简单的免费软件产品，用于创建虚拟本地网络。该程序允许用户安全地连接位于防火墙后的计算机、异地组网等",
+      "icon": "/icons/Radmin VPN.ico",
+      "category": "网络工具",
+      "open_source": false,
+      "repo_url": null,
+      "versions": [
+        {
+          "version": "v2.0.4899.9",
+          "size": "46.40MB",
+          "price": 0.0,
+          "name": "原版",
+          "download": "源/downloads/联机工具/Radmin VPN.exe"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "图标提取转换器",
+      "description": "一款能够提取应用图标、转换格式的应用",
+      "icon": "/icons/图标提取转换器3.2.0.0汉化版.ico",
+      "category": "Windows工具",
+      "open_source": false,
+      "repo_url": null,
+      "versions": [
+        {
+          "version": "v3.2.0.0",
+          "size": "595KB",
+          "price": 0.0,
+          "name": "原版",
+          "download": "源/downloads/图标提取器/图标提取转换器.exe"
         }
       ]
     }
