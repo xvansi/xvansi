@@ -6,8 +6,13 @@
       "active": true
     },
     {
-      "id": "实用工具",
-      "name": "实用工具",
+      "id": "网络工具",
+      "name": "网络工具",
+      "active": false
+    },
+    {
+      "id": "Windows工具",
+      "name": "Windows工具",
       "active": false
     }
   ]
