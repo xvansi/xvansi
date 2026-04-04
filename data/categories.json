@@ -14,6 +14,21 @@
       "id": "Windows工具",
       "name": "Windows工具",
       "active": false
+    },
+    {
+      "id": "游戏专区",
+      "name": "游戏专区",
+      "active": false
+    },
+    {
+      "id": "Mod专区",
+      "name": "Mod专区",
+      "active": false
+    },
+    {
+      "id": "程序猿专区",
+      "name": "程序猿专区",
+      "active": false
     }
   ]
 }
