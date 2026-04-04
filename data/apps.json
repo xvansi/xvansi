@@ -1,18 +1,25 @@
 {
   "apps": [
     {
-      "id": 1,
-      "name": "测试",
-      "description": "这是一个测试应用",
-      "icon": "/icons/test.icn",
-      "category": "all",
+      "id": 2,
+      "name": "Windows激活工具",
+      "description": "开源Windows和Office激活器，支持HWID、Ohook、TSforge、KMS38和在线KMS激活方法，并具备高级故障排除功能。",
+      "icon": "/icons/default.icn",
+      "category": "实用工具",
       "versions": [
         {
-          "version": "v1.0",
-          "size": "10MB",
+          "version": "v3.10",
+          "size": "730KB",
           "price": 0.0,
-          "name": "测试版",
-          "download": "downloads/test/test.exe"
+          "name": "中文版",
+          "download": "downloads/MAS_AIO/MAS_AIO_CN_v3.10.cmd"
+        },
+        {
+          "version": "v3.10",
+          "size": "744KB",
+          "price": 0.0,
+          "name": "英文版",
+          "download": "downloads/MAS_AIO/MAS_AIO.cmd"
         }
       ]
     }
