@@ -213,6 +213,7 @@
     }
 
     .app-card {
+      position: relative;
       border: 2px solid #000;
       background: #fff;
       padding: 1.5rem 1.2rem 1.5rem;
@@ -277,10 +278,28 @@
       font-size: 2.6rem;
     }
 
-    .icon-doc::before {
-      content: "📄";
-      filter: grayscale(100%);
-      font-size: 2.2rem;
+    .github-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 32px;
+      height: 32px;
+      background: #000;
+      border: 2px solid #000;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 16px;
+      text-decoration: none;
+      box-shadow: 3px 3px 0 #000;
+      transition: all 0.2s ease;
+    }
+
+    .github-icon:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 #000;
     }
 
     .app-name {
@@ -1016,6 +1035,7 @@
               : `<div class="${app.icon}"></div>`;
             card.innerHTML = `
               <div class="app-icon">${iconHtml}</div>
+              ${app.open_source && app.repo_url ? `<a href="${app.repo_url}" target="_blank" class="github-icon" title="GitHub仓库">⚙</a>` : ''}
               <h2 class="app-name">${app.name}</h2>
               <div class="app-meta"><span>${defaultVersion.version}</span><span>${defaultVersion.size}</span></div>
               <p class="app-description">${app.description}</p>

@@ -6,6 +6,8 @@
       "description": "开源Windows和Office激活器，支持HWID、Ohook、TSforge、KMS38和在线KMS激活方法，并具备高级故障排除功能。",
       "icon": "/icons/mas.ico",
       "category": "实用工具",
+      "open_source": true,
+      "repo_url": "https://github.com/massgravel/Microsoft-Activation-Scripts",
       "versions": [
         {
           "version": "v3.10",
