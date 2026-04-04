@@ -814,6 +814,39 @@
         grid-template-columns: 1fr;
       }
     }
+
+    .ad-container {
+      width: 100%;
+      max-width: 728px;
+      margin: 2rem auto;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .ad-container iframe {
+      width: 100% !important;
+      height: auto !important;
+      min-height: 60px;
+      max-width: 728px;
+    }
+
+    @media (max-width: 768px) {
+      .ad-container {
+        max-width: 468px;
+      }
+      .ad-container iframe {
+        min-height: 60px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .ad-container {
+        max-width: 320px;
+      }
+      .ad-container iframe {
+        min-height: 50px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -862,16 +895,18 @@
       <span>⚫ 黑白套装 ⚪</span> 任选三件以上自动减25% <span>限时一周</span>
     </div>
 
-    <script>
-       atOptions = {
-         'key' : '86909a40bc89631a08a1c1760f36f654',
-         'format' : 'iframe',
-         'height' : 60,
-         'width' : 468,
-         'params' : {}
-       };
-    </script>
-    <script src="https://www.highperformanceformat.com/86909a40bc89631a08a1c1760f36f654/invoke.js"></script>
+    <div class="ad-container">
+      <script>
+         atOptions = {
+           'key' : '86909a40bc89631a08a1c1760f36f654',
+           'format' : 'iframe',
+           'height' : 60,
+           'width' : 468,
+           'params' : {}
+         };
+      </script>
+      <script src="https://www.highperformanceformat.com/86909a40bc89631a08a1c1760f36f654/invoke.js"></script>
+    </div>
 
     <footer class="footer" role="contentinfo">
       <p>墨栈 · 软件商店</p>
