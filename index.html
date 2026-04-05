@@ -1049,15 +1049,27 @@
           });
         }
         
+        loading.classList.remove('active');
+        
+        // 在网格下方显示申请资源链接
         const requestResourceElement = document.createElement('div');
         requestResourceElement.className = 'request-resource';
-        requestResourceElement.style.cssText = 'text-align: center; margin-top: 2rem;';
+        requestResourceElement.style.cssText = 'text-align: center; margin-top: 3rem;';
         requestResourceElement.innerHTML = `
           <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__qyRdOtUMVEzV09JVElIWUtWQ0ZGSTZaS1c4TU1UQi4u" target="_blank" style="font-size: 0.85rem; color: #666; text-decoration: underline;">没找到结果？申请资源</a>
         `;
-        grid.appendChild(requestResourceElement);
         
-        loading.classList.remove('active');
+        // 找到网格容器的父元素，在网格后面添加申请资源链接
+        const gridParent = grid.parentElement;
+        if (gridParent) {
+          // 先检查是否已经存在申请资源链接，如果存在则移除
+          const existingRequestElement = gridParent.querySelector('.request-resource');
+          if (existingRequestElement) {
+            existingRequestElement.remove();
+          }
+          // 在网格后面添加新的申请资源链接
+          gridParent.insertBefore(requestResourceElement, grid.nextSibling);
+        }
       }, 300);
     }
 
