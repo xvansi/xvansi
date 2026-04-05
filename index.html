@@ -897,8 +897,7 @@
       </div>
       <nav class="nav" role="navigation" aria-label="主导航">
         <a href="#" onclick="showHome()">首页</a>
-        <a href="#" onclick="showAllApps()">浏览</a>
-        <a href="#" onclick="showSupport()">支持</a>
+        <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__qyRdOtUMVEzV09JVElIWUtWQ0ZGSTZaS1c4TU1UQi4u" target="_blank">反馈</a>
         <div class="cart-icon" onclick="openCart()" aria-label="购物车" role="button" tabindex="0">
           🛒
           <span class="cart-count" id="cartCount">0</span>
@@ -1030,7 +1029,13 @@
 
       setTimeout(() => {
         if (appsToRender.length === 0) {
-          grid.innerHTML = '<div class="no-results">未找到匹配的软件</div>';
+          grid.innerHTML = `
+            <div class="no-results">未找到匹配的软件</div>
+            <div class="request-resource" style="text-align: center; margin-top: 2rem; padding: 1.5rem; border: 2px dashed #000; background: #f9f9f9;">
+              <p style="margin-bottom: 1rem; font-weight: 600;">没找到结果？申请资源</p>
+              <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__qyRdOtUMVEzV09JVElIWUtWQ0ZGSTZaS1c4TU1UQi4u" target="_blank" style="display: inline-block; background: #000; color: #fff; padding: 0.5rem 1.5rem; text-decoration: none; font-weight: 600; border: 2px solid #000; box-shadow: 3px 3px 0 #000;">去申请</a>
+            </div>
+          `;
         } else {
           appsToRender.forEach(app => {
             const defaultVersion = app.versions[0];
@@ -1048,6 +1053,9 @@
               <div class="app-footer">
                 <span class="price">$${defaultVersion.price} <small>永久</small></span>
                 <button class="btn" onclick="showVersionModal(${app.id})">购买</button>
+              </div>
+              <div class="request-version" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #ddd; text-align: center;">
+                <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__qyRdOtUMVEzV09JVElIWUtWQ0ZGSTZaS1c4TU1UQi4u" target="_blank" style="font-size: 0.85rem; color: #666; text-decoration: underline;">没有你想要的版本？申请一下</a>
               </div>
             `;
             grid.appendChild(card);
