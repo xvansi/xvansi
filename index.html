@@ -1071,7 +1071,22 @@
       const version = app.versions[index];
       
       if (version.download) {
-        window.open(version.download, '_blank');
+        const downloadPath = version.download;
+        const isLocalPath = downloadPath.startsWith('file://') || !downloadPath.startsWith('http');
+        
+        if (isLocalPath) {
+          const link = document.createElement('a');
+          link.href = downloadPath;
+          link.download = downloadPath.split('/').pop() || `${app.name}_${version.name}.zip`;
+          link.style.display = 'none';
+          document.body.appendChild(link);
+          link.click();
+          setTimeout(() => {
+            document.body.removeChild(link);
+          }, 100);
+        } else {
+          window.open(downloadPath, '_blank');
+        }
         showNotification(`${app.name} ${version.name} 开始下载`, 'success');
       } else {
         showNotification('下载链接不存在', 'error');
