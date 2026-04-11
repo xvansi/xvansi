@@ -136,7 +136,7 @@
           "size": "2.27MB",
           "price": 0.0,
           "name": "正版安装包",
-          "download": "源/downloads/SteamSetup.exe"
+          "download": "https://gh-proxy.org/https://github.com/xvansi/xvansi/blob/main/downloads/Steam/SteamSetup.exe"
         }
       ]
     }
