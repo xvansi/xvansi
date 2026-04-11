@@ -121,6 +121,24 @@
           "download": "https://edgeone.gh-proxy.org/https://github.com/xvansi/files/releases/download/1/Stardew.Valley.rar"
         }
       ]
+    },
+    {
+      "id": 7,
+      "name": "Steam",
+      "description": "Steam 是全球最大的数字游戏发行平台与玩家社区。在这里，你可以购买、下载、游玩数千款游戏，从 3A 大作到精品独立游戏应有尽有。平台提供自动更新、云存档、创意工坊（模组社区）等实用功能，并支持 PC、Mac 及 Steam Deck 设备。通过好友系统、游戏内语音和社区中心，你可以随时与全球玩家联机、分享截图、撰写评测。此外，Steam 定期举办季节大促、新品节等活动，帮你用实惠价格发现好游戏。无论你是休闲玩家还是硬核发烧友，Steam 都是通往 PC 游戏世界的大门。",
+      "icon": "/icons/Steam.ico",
+      "category": "游戏专区",
+      "open_source": false,
+      "repo_url": null,
+      "versions": [
+        {
+          "version": "-",
+          "size": "2.27MB",
+          "price": 0.0,
+          "name": "正版安装包",
+          "download": "源/downloads/SteamSetup.exe"
+        }
+      ]
     }
   ]
 }
