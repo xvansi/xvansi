@@ -90,27 +90,6 @@
       border-bottom-color: #000;
     }
 
-    .cart-icon {
-      position: relative;
-      cursor: pointer;
-    }
-
-    .cart-count {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: #000;
-      color: #fff;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: bold;
-    }
-
     .feature-bar {
       background: #f2f2f2;
       border: 2px solid #000;
@@ -884,12 +863,6 @@
   </style>
 </head>
 <body>
-  <div class="cart-floating" id="cartFloating" onclick="openCart()" role="button" tabindex="0" aria-label="打开购物车">
-    <div class="cart-floating-icon">🛒</div>
-    <div class="cart-floating-count" id="cartFloatingCount">0</div>
-    <div class="cart-floating-total" id="cartFloatingTotal">$0</div>
-  </div>
-
   <div class="store">
     <header class="header" role="banner">
       <div class="logo">
@@ -898,10 +871,6 @@
       <nav class="nav" role="navigation" aria-label="主导航">
         <a href="#" onclick="showHome()">首页</a>
         <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAO__qyRdOtUMVEzV09JVElIWUtWQ0ZGSTZaS1c4TU1UQi4u" target="_blank">反馈</a>
-        <div class="cart-icon" onclick="openCart()" aria-label="购物车" role="button" tabindex="0">
-          🛒
-          <span class="cart-count" id="cartCount">0</span>
-        </div>
       </nav>
     </header>
 
@@ -948,21 +917,6 @@
     </footer>
   </div>
 
-  <div class="modal" id="cartModal" role="dialog" aria-labelledby="cartModalTitle" aria-modal="true">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 id="cartModalTitle">购物车</h2>
-        <button class="close-btn" onclick="closeCart()" aria-label="关闭购物车">×</button>
-      </div>
-      <div id="cartItems"></div>
-      <div class="cart-total" id="cartTotal">
-        <span>总计:</span>
-        <span id="totalPrice">$0</span>
-      </div>
-      <button class="checkout-btn" onclick="checkout()">结算</button>
-    </div>
-  </div>
-
   <div class="modal" id="versionModal" role="dialog" aria-labelledby="versionModalTitle" aria-modal="true">
     <div class="modal-content">
       <div class="modal-header">
@@ -977,7 +931,6 @@
 
   <script>
     let apps = [];
-    let cart = [];
     let currentCategory = 'all';
     let searchQuery = '';
 
@@ -1084,16 +1037,23 @@
       document.getElementById('versionModalTitle').textContent = `${app.name} - 选择版本`;
       
       const versionList = document.getElementById('versionList');
-      versionList.innerHTML = app.versions.map((ver, index) => `
-        <div class="version-item" onclick="selectVersion(${index})" data-index="${index}">
-          <div class="version-info">
-            <div class="version-name">${ver.name}</div>
-            <div class="version-detail">${ver.version} · ${ver.size}</div>
+      versionList.innerHTML = app.versions.map((ver, index) => {
+        const isPaid = ver.price > 0;
+        const buyButton = isPaid ? `
+          <button class="version-select-btn" onclick="buyVersion(${index}); event.stopPropagation();">去购买</button>
+        ` : '';
+        return `
+          <div class="version-item" onclick="downloadVersion(${index})" data-index="${index}">
+            <div class="version-info">
+              <div class="version-name">${ver.name}</div>
+              <div class="version-detail">${ver.version} · ${ver.size}</div>
+            </div>
+            <div class="version-price">$${ver.price}</div>
+            ${buyButton}
+            <button class="version-select-btn" onclick="downloadVersion(${index}); event.stopPropagation();">下载</button>
           </div>
-          <div class="version-price">$${ver.price}</div>
-          <button class="version-select-btn">选择</button>
-        </div>
-      `).join('');
+        `;
+      }).join('');
       
       const requestVersionElement = document.createElement('div');
       requestVersionElement.style.cssText = 'margin-top: 1.5rem; text-align: center;';
@@ -1106,22 +1066,29 @@
       document.body.style.overflow = 'hidden';
     }
 
-    function selectVersion(index) {
+    function downloadVersion(index) {
       const app = apps.find(a => a.id === currentAppId);
-      selectedVersion = app.versions[index];
+      const version = app.versions[index];
       
-      document.querySelectorAll('.version-item').forEach((item, i) => {
-        if (i === index) {
-          item.classList.add('selected');
-        } else {
-          item.classList.remove('selected');
-        }
-      });
+      if (version.download) {
+        window.open(version.download, '_blank');
+        showNotification(`${app.name} ${version.name} 开始下载`, 'success');
+      } else {
+        showNotification('下载链接不存在', 'error');
+      }
       
-      setTimeout(() => {
-        addVersionToCart(currentAppId, selectedVersion);
-        closeVersionModal();
-      }, 300);
+      closeVersionModal();
+    }
+    
+    function buyVersion(index) {
+      const app = apps.find(a => a.id === currentAppId);
+      const version = app.versions[index];
+      
+      const buyUrl = prompt('请输入购买链接:', 'https://example.com/buy');
+      if (buyUrl) {
+        window.open(buyUrl, '_blank');
+        showNotification('跳转到购买页面', 'success');
+      }
     }
 
     function closeVersionModal() {
@@ -1129,215 +1096,6 @@
       document.body.style.overflow = '';
       currentAppId = null;
       selectedVersion = null;
-    }
-
-    function addVersionToCart(appId, version) {
-      const app = apps.find(a => a.id === appId);
-      const versionIndex = app.versions.findIndex(v => v.version === version.version);
-      const cartItem = {
-        id: appId,
-        name: `${app.name} (${version.name})`,
-        price: version.price,
-        version: version.version,
-        versionName: version.name,
-        versionIndex: versionIndex
-      };
-      
-      if (cart.some(item => item.id === appId && item.version === version.version)) {
-        showNotification('该版本已在购物车中', 'error');
-        return;
-      }
-
-      cart.push(cartItem);
-      updateCartCount();
-      showNotification(`${app.name} ${version.name} 已添加到购物车`, 'success');
-    }
-
-    function filterByCategory(category, element) {
-      currentCategory = category;
-      
-      document.querySelectorAll('.cat-item').forEach(item => {
-        item.classList.remove('active');
-      });
-      element.classList.add('active');
-
-      let filteredApps = apps;
-      
-      if (category !== 'all') {
-        filteredApps = apps.filter(app => app.category === category);
-      }
-
-      if (searchQuery) {
-        filteredApps = filteredApps.filter(app => 
-          app.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          app.description.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-      }
-
-      renderApps(filteredApps);
-    }
-
-    function searchApps() {
-      searchQuery = document.getElementById('searchInput').value.trim();
-      
-      let filteredApps = apps;
-
-      if (currentCategory !== 'all') {
-        filteredApps = filteredApps.filter(app => app.category === currentCategory);
-      }
-
-      if (searchQuery) {
-        filteredApps = filteredApps.filter(app => 
-          app.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          app.description.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-      }
-
-      renderApps(filteredApps);
-    }
-
-    function handleSearch(event) {
-      if (event.key === 'Enter') {
-        searchApps();
-      }
-    }
-
-
-
-    function removeFromCart(appId) {
-      cart = cart.filter(item => item.id !== appId);
-      updateCartCount();
-      renderCart();
-      showNotification('软件已从购物车移除', 'success');
-    }
-
-    function updateCartCount() {
-      document.getElementById('cartCount').textContent = cart.length;
-      updateCartFloating();
-    }
-
-    function updateCartFloating() {
-      const floating = document.getElementById('cartFloating');
-      const floatingCount = document.getElementById('cartFloatingCount');
-      const floatingTotal = document.getElementById('cartFloatingTotal');
-
-      if (cart.length > 0) {
-        floating.classList.add('show');
-        floatingCount.textContent = cart.length;
-        let total = cart.reduce((sum, item) => sum + item.price, 0);
-        if (cart.length >= 3) {
-          total = total * 0.75;
-        }
-        floatingTotal.textContent = '$' + total.toFixed(2);
-      } else {
-        floating.classList.remove('show');
-      }
-    }
-
-    function renderCart() {
-      const cartItems = document.getElementById('cartItems');
-      
-      if (cart.length === 0) {
-        cartItems.innerHTML = '<p style="text-align: center; padding: 2rem; color: #666;">购物车为空</p>';
-        document.getElementById('totalPrice').textContent = '$0';
-        return;
-      }
-
-      let total = 0;
-      cartItems.innerHTML = cart.map(item => {
-        total += item.price;
-        return `
-          <div class="cart-item">
-            <div class="cart-item-info">
-              <div class="cart-item-name">${item.name}</div>
-              <div class="cart-item-price">$${item.price}</div>
-            </div>
-            <button class="cart-item-remove" onclick="removeFromCart(${item.id})">移除</button>
-          </div>
-        `;
-      }).join('');
-
-      if (cart.length >= 3) {
-        total = total * 0.75;
-        cartItems.innerHTML += `
-          <div style="text-align: center; padding: 1rem; background: #f0f0f0; border: 2px solid #000; margin-top: 1rem; font-weight: 700;">
-            🎉 套装优惠：已自动减免 25%
-          </div>
-        `;
-      }
-
-      document.getElementById('totalPrice').textContent = `$${total.toFixed(2)}`;
-    }
-
-    function openCart() {
-      renderCart();
-      document.getElementById('cartModal').classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeCart() {
-      document.getElementById('cartModal').classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    function checkout() {
-      if (cart.length === 0) {
-        showNotification('购物车为空，请先添加软件', 'error');
-        return;
-      }
-
-      try {
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
-        const finalTotal = cart.length >= 3 ? total * 0.75 : total;
-        
-        showNotification(`订单提交成功！总计：$${finalTotal.toFixed(2)}`, 'success');
-        
-        setTimeout(() => {
-          const downloadNotification = document.createElement('div');
-          downloadNotification.className = 'notification success show';
-          downloadNotification.innerHTML = `
-            <div style="margin-bottom: 0.5rem; font-weight: bold;">开始下载您的软件</div>
-            ${cart.map(item => {
-              return `<div style="margin: 0.3rem 0;">📥 ${item.name}</div>`;
-            }).join('')}
-          `;
-          document.body.appendChild(downloadNotification);
-          
-          cart.forEach((item, index) => {
-            setTimeout(() => {
-              const app = apps.find(a => a.id === item.id);
-              const version = app.versions[item.versionIndex];
-              const downloadPath = version.download;
-              const fileName = downloadPath.split('/').pop();
-              
-              const link = document.createElement('a');
-              link.href = downloadPath;
-              link.download = fileName;
-              link.style.display = 'none';
-              document.body.appendChild(link);
-              link.click();
-              setTimeout(() => {
-                document.body.removeChild(link);
-              }, 100);
-            }, index * 500);
-          });
-          
-          setTimeout(() => {
-            downloadNotification.classList.remove('show');
-            setTimeout(() => {
-              downloadNotification.remove();
-              cart = [];
-              updateCartCount();
-              closeCart();
-              
-              window.open('https://www.profitablecpmratenetwork.com/y6nzmxs3yw?key=d7467d189ec28ae24c5fc3b214cc99d7', '_blank');
-            }, 300);
-          }, 5000);
-        }, 500);
-      } catch (error) {
-        showNotification('结算时发生错误，请重试', 'error');
-        console.error('Checkout error:', error);
-      }
     }
 
     function showNotification(message, type) {
@@ -1390,11 +1148,7 @@
       loadCategories();
 
       document.addEventListener('click', (e) => {
-        const cartModal = document.getElementById('cartModal');
         const versionModal = document.getElementById('versionModal');
-        if (e.target === cartModal) {
-          closeCart();
-        }
         if (e.target === versionModal) {
           closeVersionModal();
         }
@@ -1402,16 +1156,7 @@
 
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-          closeCart();
           closeVersionModal();
-        }
-      });
-
-      const cartIcon = document.querySelector('.cart-icon');
-      cartIcon.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          openCart();
         }
       });
     });
