@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TQ情报局报告 · MB-20261</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0b0d10;
+            font-family: 'Courier New', 'Courier', 'Segoe UI', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        /* 档案卡片整体风格 —— 类似机密文件 */
+        .report-card {
+            max-width: 820px;
+            width: 100%;
+            background: #f4f1ea;
+            background-image: 
+                linear-gradient(rgba(180, 140, 100, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(180, 140, 100, 0.08) 1px, transparent 1px);
+            background-size: 28px 28px;
+            border: 2px solid #2e2a24;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7), 0 0 0 2px #6b5a4a inset;
+            border-radius: 4px;
+            padding: 2rem 2.2rem 1.8rem;
+            color: #1e1b16;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        /* 密封/密级标记装饰 */
+        .report-card::before {
+            content: "🔒 机密";
+            position: absolute;
+            top: -12px;
+            right: 24px;
+            background: #6a1e1e;
+            color: #ebd9b4;
+            font-weight: bold;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            padding: 0.2rem 1rem;
+            border-radius: 0 0 6px 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #b8865b;
+            border-top: none;
+        }
+
+        /* 主标题 */
+        .title-section h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #2a1f16;
+            text-shadow: 2px 2px 0 rgba(160, 120, 80, 0.2);
+            border-bottom: 3px double #8b6b4b;
+            padding-bottom: 0.4rem;
+            margin-bottom: 0.75rem;
+            font-family: 'Courier New', 'Courier', monospace;
+            word-break: break-word;
+        }
+
+        .title-section h1 small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #5a4a3a;
+            display: block;
+            letter-spacing: 2px;
+            margin-top: 0.25rem;
+        }
+
+        /* 正文段落 */
+        .report-body p {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin: 1rem 0;
+            text-align: justify;
+            font-family: 'Courier New', 'Courier', monospace;
+            color: #1c1814;
+            background: rgba(220, 200, 170, 0.2);
+            padding: 0.75rem 1rem;
+            border-left: 6px solid #8b6b4b;
+            border-radius: 0 6px 6px 0;
+        }
+
+        /* 强调/高亮 */
+        .highlight {
+            background: #e7d6b5;
+            font-weight: bold;
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+            color: #1e1108;
+            border: 1px solid #c6a86b;
+        }
+
+        .bold-red {
+            color: #8b1e1e;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        /* 署名行 (天穹情报局/...) */
+        .signature-line {
+            text-align: right;
+            font-size: 0.95rem;
+            font-style: italic;
+            color: #3d2e20;
+            border-top: 1px dashed #a58b6e;
+            padding-top: 0.75rem;
+            margin: 1rem 0 1.2rem 0;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        /* 预捕名单区块 */
+        .arrest-list {
+            background: #e8e0d0;
+            border: 2px solid #7a5e44;
+            border-radius: 6px;
+            padding: 1.2rem 1.8rem 1.2rem 1.8rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 0 0 2px #f1eadb;
+        }
+
+        .arrest-list h2 {
+            font-size: 1.45rem;
+            font-weight: 700;
+            color: #3b2a1c;
+            border-bottom: 2px solid #9b7e5e;
+            padding-bottom: 0.3rem;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* 名单网格 */
+        .name-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 0.5rem 1rem;
+            list-style: none;
+            padding-left: 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+        }
+
+        .name-grid li {
+            padding: 0.25rem 0.5rem;
+            background: rgba(255, 250, 240, 0.6);
+            border-radius: 4px;
+            transition: background 0.1s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #dacbb8;
+        }
+
+        /* 人名样式处理 */
+        .name-grid li del {
+            color: #7a6a5a;
+            text-decoration: line-through;
+            text-decoration-color: #a52a2a;
+            text-decoration-thickness: 2px;
+        }
+
+        .name-grid li .highlight-name {
+            background: #f3e7b0;
+            padding: 0.1rem 0.4rem;
+            border-radius: 3px;
+            font-weight: 800;
+            color: #1c130b;
+            border-left: 3px solid #b8860b;
+            display: inline-block;
+        }
+
+        .name-grid li .italic-name {
+            font-style: italic;
+            font-weight: 700;
+            color: #1f3a4b;
+            background: #cddbe8;
+            padding: 0.1rem 0.4rem;
+            border-radius: 3px;
+            border-right: 3px solid #2c5777;
+        }
+
+        /* 授章/授签区块 */
+        .authorization {
+            background: #27221c;
+            color: #e9dbc8;
+            padding: 1rem 1.4rem;
+            border-radius: 8px;
+            margin: 1.5rem 0 1rem;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid #a3886a;
+            box-shadow: 0 4px 0 #0f0d0a;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .authorization span {
+            font-size: 1.2rem;
+            display: inline-block;
+        }
+
+        .authorization .stamp {
+            font-weight: 800;
+            color: #e6d7b8;
+            text-transform: uppercase;
+            border: 2px solid #b89b78;
+            padding: 0.2rem 1rem;
+            border-radius: 4px;
+            background: #3e2e1f;
+            font-size: 1.1rem;
+        }
+
+        /* 行动编号底部 */
+        .action-number {
+            text-align: right;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #522e1a;
+            letter-spacing: 2px;
+            margin-top: 1.4rem;
+            padding-top: 0.5rem;
+            border-top: 2px solid #b49b7e;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            word-break: break-word;
+        }
+
+        .action-number .code {
+            background: #2b1f14;
+            color: #f0e3cf;
+            padding: 0.2rem 1rem;
+            border-radius: 4px;
+            border: 1px solid #baa07e;
+            margin-left: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        /* 一些内联调整 */
+        .doc-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #5a4a3a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px dashed #b1987a;
+            padding-bottom: 0.25rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 600px) {
+            .report-card {
+                padding: 1.5rem 1.2rem;
+            }
+
+            .title-section h1 {
+                font-size: 1.7rem;
+            }
+
+            .name-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                font-size: 0.95rem;
+            }
+
+            .authorization {
+                flex-direction: column;
+                gap: 0.6rem;
+                align-items: flex-start;
+            }
+
+            .action-number {
+                font-size: 1rem;
+            }
+
+            .signature-line {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="report-card">
+        <!-- 顶部密级标记由伪元素实现，此处可选附加小标签 -->
+        <div class="doc-meta">
+            <span>档案号: I-GE-A-260221</span>
+            <span>紧急/立即调查</span>
+        </div>
+
+        <div class="title-section">
+            <h1>
+                TQ情报局报告
+                <small>天穹数据库 · 行动组</small>
+            </h1>
+        </div>
+
+        <div class="report-body">
+            <p>
+                由于间谍党过于猖狂，且有技术支持，编号为 <span class="highlight">*I-GE-A-260221*</span> 遭遇流失、复印、传播等危险。
+                TQ行动组申请 <span class="bold-red">**立即调查权**</span>，<span class="bold-red">**搜捕权**</span>。
+            </p>
+        </div>
+
+        <!-- 署名行 -->
+        <div class="signature-line">
+            > 署名: 天穹情报局 / 天穹数据库 / 天穹行动组
+        </div>
+
+        <!-- 预捕名单区块 -->
+        <div class="arrest-list">
+            <h2>📋 预捕名单</h2>
+            <ul class="name-grid">
+                <!-- 对每个名字应用相应样式 (删除线/高亮/斜体) 严格匹配原文 -->
+                <li><del>刘承熙</del></li>
+                <li>张赫</li>
+                <li><span class="highlight-name">胡书源</span></li>
+                <li><span class="highlight-name">谷瑞含</span></li>
+                <li><span class="highlight-name">刘明赫</span></li>
+                <li><span class="italic-name">朱梁硕</span></li>
+                <li><span class="italic-name">珍胤权</span></li>
+                <li><span class="italic-name">张炫迪</span></li>
+                <li>李天佑</li>
+                <li>王雨辰</li>
+                <li><span class="italic-name">乔慕泽</span></li>
+                <li>孙皓宸</li>
+                <li>郭奕宸</li>
+            </ul>
+        </div>
+
+        <!-- 授章/授签 信息 -->
+        <div class="authorization">
+            <span>授章: <span class="stamp">天穹国部</span></span>
+            <span>授签: <span style="font-weight:800; color:#f3dab0; text-decoration: underline wavy #b8860b;">王子鹤</span></span>
+        </div>
+
+        <!-- 行动编号 -->
+        <div class="action-number">
+            行动编号: <span class="code">MB-20261</span>
+        </div>
+
+        <!-- 装饰线 (可选) 保持档案感 -->
+        <div style="margin-top: 1rem; font-size: 0.65rem; text-align: center; color: #8f7b66; letter-spacing: 3px; border-top: 1px solid #cbb59b; padding-top: 0.6rem; font-family: 'Courier New', monospace;">
+            ⚠️ 内部机密 · 未经授权不得复制/传播 ⚠️
+        </div>
+    </div>
+</body>
+</html>
